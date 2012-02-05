@@ -1,0 +1,12 @@
+{% extends "basic.html" %}
+{% block sidebar %}
+{% if garment_list %}
+<ul> 
+{% for garment in garment_list %}
+<li><a href="/service/{{ fabric_type }}/{{ garment.name }}">{{ garment.verbose_name|title }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+    <p>No garment-types known.</p>
+{% endif %}
+{% endblock %}

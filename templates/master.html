@@ -9,6 +9,7 @@
 	<meta name="robots" content="index, follow" />
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}screen.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}override.css" media="screen" />
 </head>
 <body>
 
@@ -18,7 +19,7 @@
 {% if services_list %}
 <ul>
 {% for service in services_list %}
-<li><a href="/service/{{ service.name }}">{{ service.verbose_name|capfirst }}</a></li>
+<li><a href="/service/{{ service.name }}">{{ service.verbose_name|title }}</a></li>
 {% endfor %}
 </ul>
 {% else %}
@@ -36,6 +37,7 @@
         <div class="col2">
 			<h3>Filter:</h3>
 			{% block sidebar %}
+			<a href="/service/all/">Show all</a>
 			{% endblock sidebar %}
         </div>
     </div>
