@@ -73,6 +73,9 @@ class Garments(models.Model):
     trousers = models.BooleanField(default=False)
     dresses = models.BooleanField(default=False)
     hands = models.BooleanField("mittens and gloves",default=False)
+    def __unicode__(self):
+        mystr = "hats: %r\nscarves: %r\nsocks: %r\nshawls: %r\nsweaters: %r\nshirts: %r\nskirts: %r\ntrousers: %r\ndresses: %r\nhands: %r\n" % (self.hats, self.scarves, self.socks, self.shawls, self.sweaters, self.shirts, self.skirts, self.trousers, self.dresses, self.hands)
+        return mystr
 
 class Farming(models.Model):
     wool = models.ManyToManyField(Sheep_Breeds,blank=True)
@@ -113,6 +116,7 @@ class Source(models.Model):
     email = models.EmailField(max_length=254,blank=True)
     url = models.URLField(verify_exists=True,max_length=255,blank=True)
     services = models.ManyToManyField(Services,related_name="%(app_label)s_%(class)s_related")
+    notes = models.CharField(max_length=500,blank=True)
 
     def __unicode__(self):
         mystr = self.name+"\n"+self.contact_name+"\n"+self.street_address+"\n"+self.city+", "+self.state+"  "+self.zip_code+"\n"+self.phone+"\n"+self.email+"\n"+self.url

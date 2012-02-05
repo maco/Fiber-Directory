@@ -2,7 +2,7 @@
 {% block content %}
 {% if artisan_list %}
 {% for artisan in artisan_list %}
-<div class="{% cycle 'row1' 'row2' %}">
+<div class="entry {% cycle 'row1' 'row2' %}">
 	<h4>{{ artisan.name }}</h4>
 	<ul>
 		<li><em>Contact Name:  </em>{{ artisan.contact_name }}</li>
@@ -13,6 +13,7 @@
 		<li><em>Phone:  </em>{{ artisan.phone }}</li>
 		<li><em>E-Mail:  </em>{{ artisan.email }}</li>
 		<li><em>Website:  </em>{% if artisan.url %}<a href="{{ artisan.url }}">{{ artisan.url }}</a>{% endif %}</li>
+		<li><em>Notes:  </em>{{ artisan.notes }}</li>
 	</ul>
 </div>
 {% endfor %}
