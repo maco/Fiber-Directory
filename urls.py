@@ -1,12 +1,14 @@
 from django.conf.urls.defaults import patterns, include, url
+from fiberapp.views import HomeView
+from fiberapp.views import MaterialsView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'fiber.fiberapp.views.home', name='home'),
-#    url(r'^service/materials$', 'materials', name='materials'),
+    url(r'^$',HomeView.as_view(), name='home'),
+    url(r'^service/materials$',MaterialsView.as_view(), name='materials'),
     # url(r'^fiber/', include('fiber.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
