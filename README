@@ -1,0 +1,3 @@
+This project is intended to allow other fiber artists to create directories of their local fibersheds.
+
+Copy the settings_template.py to settings.py and fill in as needed
