@@ -1,0 +1,22 @@
+{% extends "master.html" %}
+{% block content %}
+{% if artisan_list %}
+{% for artisan in artisan_list %}
+<div class='source'>
+	<h4>{{ artisan.name }}</h4>
+	<ul>
+		<li><em>Contact Name:  </em>{{ artisan.contact_name }}</li>
+		<li><em>Address:  </em>{% if artisan.street_address %} {{ artisan.street_address }}, {% endif %}
+		{% if artisan.city %}{{ artisan.city }}, {% endif %}
+		{% if artisan.state %}{{ artisan.state }}  {% endif %}
+		{% if artisan.zip_code %}{{ artisan.zipcode_code }}{% endif %}</li>
+		<li><em>Phone:  </em>{{ artisan.phone }}</li>
+		<li><em>E-Mail:  </em>{{ artisan.email }}</li>
+		<li><em>Website:  </em>{% if artisan.url %}<a href="{{ artisan.url }}">{{ artisan.url }}</a>{% endif %}</li>
+	</ul>
+</div>
+{% endfor %}
+{% else %}
+<p>No artisans found.</p>
+{% endif %}
+{% endblock %}

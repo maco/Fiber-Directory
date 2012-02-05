@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from fiberapp.models import Services
 from fiberapp.models import Farming
+from fiberapp.models import Source
 from django.views.generic.base import TemplateView
 # Create your views here.
 
@@ -28,4 +29,13 @@ class FarmingView(TemplateView):
             print field.name
             farming.append(field)
 
-        return {'farming_list':farming,'services_list':services()}
+        farmers = []
+
+        return {'farming_list':farming,'services_list':services(),'farmer_list':farmers}
+
+class BasicView(TemplateView):
+    template_name = 'basic.html'
+    def get_context_data(self, **kwargs):
+        keyword = 'services__'+self.args[0]
+        artisans = Source.objects.filter(**{keyword:1})
+        return {'artisan_list':artisans,'services_list':services()}
