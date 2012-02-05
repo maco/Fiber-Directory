@@ -8,7 +8,7 @@
 	<meta name="keywords" content="textiles, fibershed, wool, alpaca, yarn, spinning, weaving, maryland, virginia" />
 	<meta name="robots" content="index, follow" />
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-	{#    <style media="screen" type="text/css"/> #}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}screen.css" media="screen" />
 </head>
 <body>
 
@@ -34,6 +34,7 @@
             </div>
         </div>
         <div class="col2">
+			<h3>Filter:</h3>
 			{% block sidebar %}
 			{% endblock sidebar %}
         </div>

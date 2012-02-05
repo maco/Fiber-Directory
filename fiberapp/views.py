@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from fiberapp.models import Services
-from fiberapp.models import Materials
+from fiberapp.models import Farming
 from django.views.generic.base import TemplateView
 # Create your views here.
 
@@ -20,12 +20,12 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         return {'services_list':services()}
 
-class MaterialsView(TemplateView):
-    template_name = 'materials.html'
+class FarmingView(TemplateView):
+    template_name = 'farming.html'
     def get_context_data(self, **kwargs):
-        materials = []
-        for field in Materials._meta.many_to_many:
+        farming = []
+        for field in Farming._meta.many_to_many:
             print field.name
-            materials.append(field)
+            farming.append(field)
 
-        return {'materials_list':materials,'services_list':services()}
+        return {'farming_list':farming,'services_list':services()}

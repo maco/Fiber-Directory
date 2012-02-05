@@ -73,7 +73,7 @@ class Garments(models.Model):
     dresses = models.BooleanField(default=False)
     hands = models.BooleanField("mittens and gloves",default=False)
 
-class Materials(models.Model):
+class Farming(models.Model):
     wool = models.ManyToManyField(Sheep_Breeds,blank=True)
     rabbit = models.ManyToManyField(Rabbit_Breeds,blank=True)
     goat = models.ManyToManyField(Goat_Breeds,blank=True)
@@ -81,7 +81,7 @@ class Materials(models.Model):
     plant = models.ManyToManyField(Plants,blank=True,verbose_name="plants")
 
 class Services(models.Model):
-    materials = models.ManyToManyField(Materials,blank=True)
+    farming = models.ManyToManyField(Farming,blank=True,verbose_name="farming")
     raw_fiber = models.BooleanField(default=False)
     roving = models.BooleanField(default=False)
     fleece_prep = models.BooleanField(default=False)

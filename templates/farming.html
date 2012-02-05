@@ -1,0 +1,12 @@
+{% extends "master.html" %}
+{% block sidebar %}
+{% if farming_list %}
+<ul> 
+{% for material in farming_list %}
+<li><a href="/service/farming/{{ material.name }}">{{ material.verbose_name|capfirst }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+    <p>No farming known.</p>
+{% endif %}
+{% endblock %}

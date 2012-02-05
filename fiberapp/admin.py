@@ -6,7 +6,7 @@ from fiberapp.models import Plants
 from fiberapp.models import Garments
 from fiberapp.models import Services
 from fiberapp.models import Source
-from fiberapp.models import Materials
+from fiberapp.models import Farming
 
 from django.contrib import admin
 
@@ -64,4 +64,4 @@ admin.site.register(Plants)
 admin.site.register(Garments)
 admin.site.register(Services)
 admin.site.register(Source)
-admin.site.register(Materials)
+admin.site.register(Farming)
