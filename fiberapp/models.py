@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.localflavor.us.models import PhoneNumberField
 
 # Create your models here.
 class Sheep_Breeds(models.Model):
@@ -108,7 +109,7 @@ class Source(models.Model):
     city = models.CharField(max_length=50,blank=True)
     state = models.CharField(max_length=2,choices=STATE_CHOICES,blank=True)
     zip_code = models.CharField(max_length=10,blank=True)
-    phone = models.CharField(max_length=10,blank=True)
+    phone = PhoneNumberField(blank=True)
     email = models.EmailField(max_length=254,blank=True)
     url = models.URLField(verify_exists=True,max_length=255,blank=True)
     services = models.ManyToManyField(Services,related_name="%(app_label)s_%(class)s_related")

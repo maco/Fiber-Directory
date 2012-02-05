@@ -2,7 +2,7 @@
 {% block content %}
 {% if artisan_list %}
 {% for artisan in artisan_list %}
-<div class='source'>
+<div class="{% cycle 'row1' 'row2' %}">
 	<h4>{{ artisan.name }}</h4>
 	<ul>
 		<li><em>Contact Name:  </em>{{ artisan.contact_name }}</li>
