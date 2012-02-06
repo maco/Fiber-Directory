@@ -50,7 +50,9 @@ class FarmingView(TemplateView):
         elif len(self.args) == 2:
             keyword = "services__farming__"+slugify(self.args[0])+"__"+slugify(self.args[1])
             artisans = Source.objects.filter(**{keyword:True})
-            third_level=slugify(self.args[1])
+            for field in Sheep_Breeds._meta.fields:
+                if field.name == slugify(self.args[1]):
+                    third_level = field.verbose_name
 
         if len(self.args) > 0:
             second_level=slugify(self.args[0])
