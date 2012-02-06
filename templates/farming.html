@@ -20,7 +20,7 @@
 		{% else %}
 			<li class="nav-header">Breed:</li>
 			{% for category in list %}
-				{% if category.name == third_level %}
+				{% if category.verbose_name == third_level %}
 					<li class="active"><a href="/service/farming/{{ second_level }}/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
 				{% else %}
 					<li><a href="/service/farming/{{ second_level }}/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
