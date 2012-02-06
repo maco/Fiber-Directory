@@ -84,4 +84,4 @@ class BasicView(TemplateView):
         else: 
             keyword = 'services__'+slugify(self.args[0])
             artisans = Source.objects.filter(**{keyword:True})
-            return {'artisan_list':artisans,'services_list':services()}
+            return {'artisan_list':artisans,'services_list':services(),'slug':slugify(self.args[0])}

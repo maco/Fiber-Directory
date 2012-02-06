@@ -21,10 +21,15 @@
 			<li class="nav-header">Breed:</li>
 			{% for category in list %}
 				{% if category.verbose_name == third_level %}
-					<li class="active"><a href="/service/farming/{{ second_level }}/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
+					<li class="active">
 				{% else %}
-					<li><a href="/service/farming/{{ second_level }}/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
-				{% endif %}
+				<li>{% endif %}<a href="/service/farming/{{ second_level }}/{{ category.name }}">
+					{% if category.name == "cvm" %}
+						{{ category.verbose_name }}
+					{% else %}
+						{{ category.verbose_name|title }}
+					{% endif %}
+					</a></li>
 			{% endfor %}
 		{% endif %}
 	{% endfor %}
@@ -61,7 +66,11 @@
     <a href="/service/farming/{{ second_level }}">{{ second_level|title }}</a> <span class="divider">/</span>
   </li>
   <li class="active">
-    <a href="#">{{ third_level|title }}</a>
+	{% if third_level == "CVM" %}
+  	    <a href="#">{{ third_level }}</a>
+	{% else %}
+    	<a href="#">{{ third_level|title }}</a>
+	{% endif %}
   </li>
   {% endif %}
 </ul>
