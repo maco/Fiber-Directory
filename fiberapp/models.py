@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.localflavor.us.models import PhoneNumberField
+import string
 
 # Create your models here.
 class Sheep_Breeds(models.Model):
@@ -74,7 +75,28 @@ class Garments(models.Model):
     dresses = models.BooleanField(default=False)
     hands = models.BooleanField("mittens and gloves",default=False)
     def __unicode__(self):
-        mystr = "hats: %r\nscarves: %r\nsocks: %r\nshawls: %r\nsweaters: %r\nshirts: %r\nskirts: %r\ntrousers: %r\ndresses: %r\nhands: %r\n" % (self.hats, self.scarves, self.socks, self.shawls, self.sweaters, self.shirts, self.skirts, self.trousers, self.dresses, self.hands)
+        garments = []
+        if self.hats == True:
+            garments.append("hats")
+        if self.scarves == True:
+            garments.append("scarves")
+        if self.socks == True:
+            garments.append("socks")
+        if self.shawls == True:
+            garments.append("shawls")
+        if self.sweaters == True:
+            garments.append("sweaters")
+        if self.shirts == True:
+            garments.append("shirts")
+        if self.skirts == True:
+            garments.append("skirts")
+        if self.trousers == True:
+            garments.append("trousers")
+        if self.dresses == True:
+            garments.append("dresses")
+        if self.hands == True:
+            garments.append("gloves/mittens")
+        mystr = string.join(garments,", ")
         return mystr
 
 class Farming(models.Model):
@@ -97,6 +119,36 @@ class Services(models.Model):
     sewing = models.ManyToManyField(Garments,related_name="%(app_label)s_%(class)s_related_sewing",blank=True)
     dyeing = models.BooleanField(default=False)
     felting = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        services = []
+        if self.farming.count() > 0:
+            services.append("farming")
+        if self.raw_fiber == True:
+            services.append("raw fiber")
+        if self.roving == True:
+            services.append("roving")
+        if self.fleece_prep == True:
+            services.append("fleece preparation")
+        if self.handspinning == True:
+            services.append("handspinning")
+        if self.millspinning == True:
+            services.append("millspinning")
+        if self.weaving == True:
+            services.append("weaving")
+        if self.knitting.count() > 0:
+            services.append("knitting")
+        if self.crochet.count() > 0:
+            services.append("crochet")
+        if self.sewing.count() > 0:
+            services.append("sewing")
+        if self.dyeing == True:
+            services.append("dyeing")
+        if self.felting == True:
+            services.append("felting")
+
+        mystr = string.join(services,", ")
+        return mystr
 
 class Source(models.Model):
     STATE_CHOICES = (
