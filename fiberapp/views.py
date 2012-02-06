@@ -4,6 +4,7 @@ from fiberapp.models import Source, Services, Farming, Garments
 from fiberapp.models import Sheep_Breeds, Alpaca_Breeds, Rabbit_Breeds, Goat_Breeds, Plants
 from django.views.generic.base import TemplateView
 from django.template.defaultfilters import slugify
+from django.template.defaultfilters import title
 # Create your views here.
 
 
@@ -30,11 +31,6 @@ class JunkView(TemplateView):
 
 class FarmingView(TemplateView):
     template_name = 'farming.html'
-    tables = {'wool':'Sheep_Breeds',
-                'alpaca':'Alpaca_Breeds',
-                'rabbit':'Rabbit_Breeds',
-                'goat':'Goat_Breeds',
-                'plants':'Plants'}
     def get_context_data(self, **kwargs):
         artisans = Source.objects.filter(services__farming__isnull=False)
         second_level=""
@@ -50,14 +46,14 @@ class FarmingView(TemplateView):
         elif len(self.args) == 2:
             keyword = "services__farming__"+slugify(self.args[0])+"__"+slugify(self.args[1])
             artisans = Source.objects.filter(**{keyword:True})
-            for field in eval('%s._meta.fields' % self.tables[self.args[0]]):
+            for field in eval('%s_Breeds._meta.fields' % title(self.args[0])):
                 if field.name == slugify(self.args[1]):
                     third_level = field.verbose_name
 
         if len(self.args) > 0:
             second_level=slugify(self.args[0])
             breed_list = []
-            for breed in eval('%s._meta.fields' % self.tables[self.args[0]]):
+            for breed in eval('%s_Breeds._meta.fields' % title(self.args[0])):
                 if not breed.name is 'id':
                     breed_list.append(breed)
             sidebar = [type_list, breed_list ]

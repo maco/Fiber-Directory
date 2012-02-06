@@ -100,7 +100,7 @@ class Garments(models.Model):
         return mystr
 
 class Farming(models.Model):
-    wool = models.ManyToManyField(Sheep_Breeds,blank=True)
+    sheep = models.ManyToManyField(Sheep_Breeds,blank=True)
     rabbit = models.ManyToManyField(Rabbit_Breeds,blank=True)
     goat = models.ManyToManyField(Goat_Breeds,blank=True)
     alpaca  = models.ManyToManyField(Alpaca_Breeds,blank=True)
