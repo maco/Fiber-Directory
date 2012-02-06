@@ -11,12 +11,20 @@
 		{% if forloop.first %}
 			<li class="nav-header">Type:</li>
 			{% for category in list %}
-				<li><a href="/service/farming/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
+				{% if category.name == second_level %}
+					<li class="active"><a href="/service/farming/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
+				{% else %}
+					<li><a href="/service/farming/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
+				{% endif %}
 			{% endfor %}
 		{% else %}
 			<li class="nav-header">Breed:</li>
 			{% for category in list %}
-				<li><a href="/service/farming/{{ second_level }}/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
+				{% if category.name == third_level %}
+					<li class="active"><a href="/service/farming/{{ second_level }}/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
+				{% else %}
+					<li><a href="/service/farming/{{ second_level }}/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
+				{% endif %}
 			{% endfor %}
 		{% endif %}
 	{% endfor %}
