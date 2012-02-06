@@ -1,12 +1,17 @@
 {% extends "basic.html" %}
 {% block sidebar %}
-{% if garment_list %}
+{% if sidebar_list %}
 <ul> 
-{% for garment in garment_list %}
-<li><a href="/service/{{ fabric_type }}/{{ garment.name }}">{{ garment.verbose_name|title }}</a></li>
+{% for category in sidebar_list %}
+<li><a href="/service/{{ fabric_type }}/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
 {% endfor %}
 </ul>
 {% else %}
     <p>No garment-types known.</p>
 {% endif %}
 {% endblock %}
+{% comment %}
+{% block services %}
+{#<li><em>Garments:  </em>{% for service in artisan.services.all %}{% for garment in service.{{fabric_type}}.all %}{{ garment }}{% endfor %}{% endfor %}</li> #}
+{% endblock %}
+{% endcomment %}

@@ -1,9 +1,13 @@
 {% extends "basic.html" %}
 {% block sidebar %}
-{% if farming_list %}
+{% if sidebar_list %}
 <ul> 
-{% for material in farming_list %}
-<li><a href="/service/farming/{{ material.name }}">{{ material.verbose_name|capfirst }}</a></li>
+{% for category in sidebar_list %}
+{% if second_level != "" %}
+<li><a href="/service/farming/{{ second_level }}/{{ category.name }}">{{ category.verbose_name|capfirst }}</a></li>
+{% else %}
+<li><a href="/service/farming/{{ category.name }}">{{ category.verbose_name|capfirst }}</a></li>
+{% endif %}
 {% endfor %}
 </ul>
 {% else %}
