@@ -66,3 +66,15 @@
   {% endif %}
 </ul>
 {% endblock breadcrumbs %}
+
+{% block topnav %}
+			{% for service in services_list %}
+				{% if service.verbose_name == "farming" %}
+					<li class="active"><a href="/service/{{ service.name }}">{{ service.verbose_name|title }}</a></li>
+				{% else %}
+					<li><a href="/service/{{ service.name }}">{{ service.verbose_name|title }}</a></li>
+				{% endif %}
+			{% empty %}
+				<p>No services known.</p>
+			{% endfor %}
+{% endblock topnav %}
