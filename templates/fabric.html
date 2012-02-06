@@ -1,11 +1,10 @@
 {% extends "basic.html" %}
 {% block sidebar %}
 {% if sidebar_list %}
-<ul> 
+<li class="nav-header">Filter:</li>
 {% for category in sidebar_list %}
 <li><a href="/service/{{ fabric_type }}/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
 {% endfor %}
-</ul>
 {% else %}
     <p>No garment-types known.</p>
 {% endif %}

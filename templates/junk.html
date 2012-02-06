@@ -2,7 +2,7 @@
 {% block content %}
 {% if junk == 'contact' %}
 <p>Got a local fiber source to add to the site? Email <a href="mailto:macoafiNOSPAM@gmail.com">macoafi AT gmail DOT com</a> to get it added.</p>
-{% elif junk == 'about' %}
+{% else %}{% if junk == 'about' %}
 <p>This site is brought to you by Mackenzie Morgan (programmer), Annalee Flower Horne (programmer), and Gwen Handler (seems to know every fiber geek for miles).</p>
-{% endif %}
+{% endif %}{% endif %}
 {% endblock %}

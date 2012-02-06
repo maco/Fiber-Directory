@@ -1,25 +1,29 @@
 {% extends "master.html" %}
 {% block content %}
 {% if artisan_list %}
+<table class="table">
 {% for artisan in artisan_list %}
-<div class="entry {% cycle 'row1' 'row2' %}">
+<tr class="{% cycle 'row1' 'row2' %}">
+<td>
 	<h4>{{ artisan.name }}</h4>
-	<ul>
-		<li><em>Contact Name:  </em>{{ artisan.contact_name }}</li>
-		<li><em>Address:  </em>{% if artisan.street_address %} {{ artisan.street_address }}, {% endif %}
+	<ul class="unstyled">
+		<li><i class="icon-user"></i><em>Contact Name:  </em>{{ artisan.contact_name }}</li>
+		<li><i class="icon-map-marker"></i><em>Address:  </em>{% if artisan.street_address %} {{ artisan.street_address }}, {% endif %}
 		{% if artisan.city %}{{ artisan.city }}, {% endif %}
 		{% if artisan.state %}{{ artisan.state }}  {% endif %}
 		{% if artisan.zip_code %}{{ artisan.zipcode_code }}{% endif %}</li>
-		<li><em>Phone:  </em>{{ artisan.phone }}</li>
-		<li><em>E-Mail:  </em>{{ artisan.email }}</li>
-		<li><em>Website:  </em>{% if artisan.url %}<a href="{{ artisan.url }}">{{ artisan.url }}</a>{% endif %}</li>
+		<li>&#x260e;<em>Phone:  </em>{{ artisan.phone }}</li>
+		<li><i class="icon-envelope"></i><em>E-Mail:  </em>{{ artisan.email }}</li>
+		<li><i class="icon-home"></i><em>Website:  </em>{% if artisan.url %}<a href="{{ artisan.url }}">{{ artisan.url }}</a>{% endif %}</li>
 		{% block services %}
-		<li><em>Services:  </em>{% for service in artisan.services.all %}{% if service %}{{ service }}{% endif %}{% endfor %}</li> 
+		<li><i class="icon-tags"></i><em>Services:  </em>{% for service in artisan.services.all %}{% if service %}{{ service }}{% endif %}{% endfor %}</li> 
 		{% endblock %}
-		<li><em>Notes:  </em>{{ artisan.notes }}</li>
+		<li><i class="icon-pencil"></i><em>Notes:  </em>{{ artisan.notes }}</li>
 	</ul>
-</div>
+</td>
+</tr>
 {% endfor %}
+</table>
 {% else %}
 <p>No artisans found.</p>
 {% endif %}

@@ -11,6 +11,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$',HomeView.as_view(), name='home'),
+    url(r'^service/$',BasicView.as_view(), name='farming'),
     url(r'^service/farming/$',FarmingView.as_view(), name='farming'),
     url(r'^service/farming/(\w+)/$',FarmingView.as_view(), name='farming'),
     url(r'^service/farming/(\w+)/(\w+)/$',FarmingView.as_view(), name='farming'),

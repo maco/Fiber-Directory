@@ -1,5 +1,5 @@
-<!--<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">-->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" >
 <head>
 	<title>{% block title %}Mid-Atlantic Fibershed{% endblock %}</title>
@@ -8,46 +8,112 @@
 	<meta name="keywords" content="textiles, fibershed, wool, alpaca, yarn, spinning, weaving, maryland, virginia" />
 	<meta name="robots" content="index, follow" />
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}screen.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}override.css" media="screen" />
-</head>
-<body>
 
-<div id="header">
-<h1><a href="/">Mid-Atlantic Fibershed</a></h1>
-<h2>Services &amp; Products:</h2>
-{% if services_list %}
-<ul>
-{% for service in services_list %}
-<li><a href="/service/{{ service.name }}">{{ service.verbose_name|title }}</a></li>
-{% endfor %}
-</ul>
-{% else %}
-    <p>No services known.</p>
-{% endif %}
-</div>
-<div class="colmask leftmenu">
-    <div class="colright">
-        <div class="col1wrap">
-            <div class="col1">
-				{% block content %}
-				{% endblock content%}
-            </div>
-        </div>
-        <div class="col2">
-			<h3>Filter:</h3>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+    <link href="{{ STATIC_URL }}css/override.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Mid-Atlantic Fibershed</a>
+          <div class="nav-collapse">
+			{% if services_list %}
+			<ul class="nav">
+			{% for service in services_list %}
+			<li><a href="/service/{{ service.name }}">{{ service.verbose_name|title }}</a></li>
+			{% endfor %}
+			</ul>
+			{% else %}
+				<p>No services known.</p>
+			{% endif %}
+     	  </div><!--/.nav-collapse -->
+    	</div>
+      </div>
+    </div>
+
+  <div class="subnav">
+	  <ul class="nav nav-pills">    
+		  {% block breadcrumbs %}
+		  {% endblock breadcrumbs%}
+	  </ul>
+  </div>
+
+	<div class="container-fluid">
+	  <div class="row-fluid">
+		<div class="span3">
+		  <div class="well sidebar-nav">
+			<ul class="nav nav-list">
 			{% block sidebar %}
+			<li class="nav-header">Filter:</li>
 			<a href="/service/all/">Show all</a>
 			{% endblock sidebar %}
-        </div>
-    </div>
-</div>
-<div id="footer">
-	<ul>
-		<li><a href="/contact">Contact</a></li>
-		<li><a href="/about">About Us</a></li>
-		<li><a href="https://github.com/maco/Fiber-Directory/">Get the Code</a></li>
-	<ul>
-</div>
-</body>
+		</ul>
+		  </div><!--/.well -->
+		</div><!--/span-->
+		<div class="span9">
+		  <div class="hero-unit">
+			{% block content %}
+			{% endblock content%}
+   		  </div>
+		</div> <!--/span-->
+	    </div><!--/row-->
+      <hr>
+
+      <footer>
+		<ul>
+			<li><a href="/contact">Contact</a></li>
+			<li><a href="/about">About Us</a></li>
+			<li><a href="https://github.com/maco/Fiber-Directory/">Get the Code</a></li>
+		<ul>
+      </footer>
+    </div><!--/.fluid-container-->
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
+
+  </body>
 </html>
+

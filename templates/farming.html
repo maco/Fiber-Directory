@@ -1,16 +1,60 @@
 {% extends "basic.html" %}
 {% block sidebar %}
 {% if sidebar_list %}
-<ul> 
-{% for category in sidebar_list %}
-{% if second_level != "" %}
-<li><a href="/service/farming/{{ second_level }}/{{ category.name }}">{{ category.verbose_name|capfirst }}</a></li>
+{% if second_level == "" %}
+	<li class="nav-header">Type:</li>
+	{% for category in sidebar_list %}
+			<li><a href="/service/farming/{{ category.name }}">{{ category.verbose_name|capfirst }}</a></li>
+	{% endfor %}
 {% else %}
-<li><a href="/service/farming/{{ category.name }}">{{ category.verbose_name|capfirst }}</a></li>
+	{% for list in sidebar_list %}
+		{% if forloop.first %}
+			<li class="nav-header">Type:</li>
+			{% for category in list %}
+				<li><a href="/service/farming/{{ category.name }}">{{ category.verbose_name|capfirst }}</a></li>
+			{% endfor %}
+		{% else %}
+			<li class="nav-header">Breed:</li>
+			{% for category in list %}
+				<li><a href="/service/farming/{{ second_level }}/{{ category.name }}">{{ category.verbose_name|capfirst }}</a></li>
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
 {% endif %}
-{% endfor %}
-</ul>
 {% else %}
     <p>No farming known.</p>
 {% endif %}
 {% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="/service/">Services</a> <span class="divider">/</span>
+  </li>
+  {% if second_level == "" %}
+  <li class="active">
+    <a href="#">Farming</a>
+  </li>
+  {% else %}
+  <li>
+    <a href="/service/farming">Farming</a> <span class="divider">/</span>
+  </li>
+  {% endif %} 
+  {% if second_level != "" and third_level == "" %}
+  <li class="active">
+    <a href="#">{{ second_level|title }}</a> <span class="divider">/</span>
+  </li>
+  {% endif %}
+  {% if second_level != "" and third_level != "" %}
+  <li>
+    <a href="/service/farming/{{ second_level }}">{{ second_level|title }}</a> <span class="divider">/</span>
+  </li>
+  <li class="active">
+    <a href="#">{{ third_level|title }}</a>
+  </li>
+  {% endif %}
+</ul>
+{% endblock breadcrumbs %}

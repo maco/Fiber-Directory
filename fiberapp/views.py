@@ -37,24 +37,31 @@ class FarmingView(TemplateView):
                 'plants':'Plants'}
     def get_context_data(self, **kwargs):
         artisans = Source.objects.filter(services__farming__isnull=False)
+        second_level=""
+        third_level=""
         # make a filter list for sidebar
         sidebar = []
+        type_list = []
         for field in Farming._meta.many_to_many:
-            sidebar.append(field)
-        second_level=""
+            type_list.append(field)
         if len(self.args) == 1:
             keyword = "services__farming__"+slugify(self.args[0])+"__isnull"
             artisans = Source.objects.filter(**{keyword:False})
-            sidebar = []
-            for breed in eval('%s._meta.fields' % self.tables[self.args[0]]):
-                if not breed.name is 'id':
-                    sidebar.append(breed)
-            second_level=slugify(self.args[0])
         elif len(self.args) == 2:
             keyword = "services__farming__"+slugify(self.args[0])+"__"+slugify(self.args[1])
             artisans = Source.objects.filter(**{keyword:True})
+            third_level=slugify(self.args[1])
 
-        return {'sidebar_list':sidebar,'services_list':services(),'artisan_list':artisans,'second_level':second_level}
+        if len(self.args) > 0:
+            second_level=slugify(self.args[0])
+            breed_list = []
+            for breed in eval('%s._meta.fields' % self.tables[self.args[0]]):
+                if not breed.name is 'id':
+                    breed_list.append(breed)
+            sidebar = [type_list, breed_list ]
+        else:
+            sidebar = type_list
+        return {'sidebar_list':sidebar,'services_list':services(),'artisan_list':artisans,'second_level':second_level,'third_level':third_level}
 
 class FabricView(TemplateView):
     template_name = 'fabric.html'
@@ -70,7 +77,7 @@ class FabricView(TemplateView):
 class BasicView(TemplateView):
     template_name = 'basic.html'
     def get_context_data(self, **kwargs):
-        if self.args[0] == "all":
+        if len(self.args) == 0 or self.args[0] == "all":
             return {'artisan_list':Source.objects.all(),'services_list':services()}
         else: 
             keyword = 'services__'+slugify(self.args[0])
