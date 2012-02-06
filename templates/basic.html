@@ -13,6 +13,9 @@
 		<li><em>Phone:  </em>{{ artisan.phone }}</li>
 		<li><em>E-Mail:  </em>{{ artisan.email }}</li>
 		<li><em>Website:  </em>{% if artisan.url %}<a href="{{ artisan.url }}">{{ artisan.url }}</a>{% endif %}</li>
+		{% block services %}
+		<li><em>Services:  </em>{% for service in artisan.services.all %}{% if service %}{{ service }}{% endif %}{% endfor %}</li> 
+		{% endblock %}
 		<li><em>Notes:  </em>{{ artisan.notes }}</li>
 	</ul>
 </div>
