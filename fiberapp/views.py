@@ -35,7 +35,6 @@ class JunkView(TemplateView):
 class FarmingView(TemplateView):
     template_name = 'farming.html'
     def get_context_data(self, **kwargs):
-        print kwargs.keys()
         artisans = Source.objects.filter(services__farming__isnull=False)
         second_level=""
         second_level_verbose=""
