@@ -1,0 +1,16 @@
+.row1 {
+	background-color:#DEDEDE;
+}
+
+.row2 {
+	background-color:#EEEEEE;
+}
+
+.nav-pills li.active > a{
+	text-decoration:none;
+	background-color:transparent;
+}
+
+a.empty {
+	color:#999;
+}
