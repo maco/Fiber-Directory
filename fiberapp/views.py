@@ -6,8 +6,10 @@ from fiberapp.models import Dye_Plant_Breeds, Fiber_Plant_Breeds
 from django.views.generic.base import TemplateView
 from django.template.defaultfilters import slugify
 from django.template.defaultfilters import title
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
+PER_PAGE = 10
 
 def services():
     services = []
@@ -33,6 +35,7 @@ class JunkView(TemplateView):
 class FarmingView(TemplateView):
     template_name = 'farming.html'
     def get_context_data(self, **kwargs):
+        print kwargs.keys()
         artisans = Source.objects.filter(services__farming__isnull=False)
         second_level=""
         second_level_verbose=""
@@ -47,25 +50,24 @@ class FarmingView(TemplateView):
             else:
                 type_list[field] = "empty"
 
-
-        if len(self.args) == 1:
-            keyword = "services__farming__"+slugify(self.args[0])+"__isnull"
+        if kwargs.has_key("types") and not kwargs.has_key("breed"):
+            keyword = "services__farming__"+slugify(kwargs["types"])+"__isnull"
             artisans = Source.objects.filter(**{keyword:False})
-        elif len(self.args) == 2:
-            keyword = "services__farming__"+slugify(self.args[0])+"__"+slugify(self.args[1])
+        elif kwargs.has_key("types") and kwargs.has_key("breed"):
+            keyword = "services__farming__"+slugify(kwargs["types"])+"__"+slugify(kwargs["breed"])
             artisans = Source.objects.filter(**{keyword:True})
-            for field in eval('%s_Breeds._meta.fields' % title(self.args[0])):
-                if field.name == slugify(self.args[1]):
+            for field in eval('%s_Breeds._meta.fields' % title(kwargs["types"])):
+                if field.name == slugify(kwargs["breed"]):
                     third_level = field.verbose_name
 
-        if len(self.args) > 0:
-            second_level=slugify(self.args[0])
+        if kwargs.has_key("types"):
+            second_level=slugify(kwargs["types"])
             breed_list = {}
             # make a dictionary of breeds and whether they have data
-            for breed in eval('%s_Breeds._meta.fields' % title(self.args[0])):
+            for breed in eval('%s_Breeds._meta.fields' % title(kwargs["types"])):
                 if not breed.name is 'id':
                     keyword = breed.name
-                    if eval('%s_Breeds' % title(self.args[0])).objects.filter(**{keyword:True}):
+                    if eval('%s_Breeds' % title(kwargs["types"])).objects.filter(**{keyword:True}):
                         breed_list[breed] = "full"
                     else:
                         breed_list[breed] = "empty"
@@ -73,11 +75,26 @@ class FarmingView(TemplateView):
 
             # Store verbose name for the category we're in
             for cat in Farming._meta.many_to_many:
-                if cat.name == slugify(self.args[0]):
+                if cat.name == slugify(kwargs["types"]):
                     second_level_verbose = cat.verbose_name
             sidebar = [type_list, breed_list ]
         else:
             sidebar = type_list
+
+        # Paginate the artisans
+        if self.request.GET.get('page'):
+            page = self.request.GET.get('page')
+        else:
+            page = 1
+        paginator = Paginator(artisans,PER_PAGE)
+        try:
+            artisans = paginator.page(page)
+        except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+             artisans = paginator.page(1)
+        except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+            artisans = paginator.page(paginator.num_pages)
         return {'sidebar_list':sidebar,'services_list':services(),'artisan_list':artisans,'second_level':second_level,'second_level_verbose':second_level_verbose,'third_level':third_level}
 
 class FabricView(TemplateView):
@@ -94,9 +111,29 @@ class FabricView(TemplateView):
 class BasicView(TemplateView):
     template_name = 'basic.html'
     def get_context_data(self, **kwargs):
-        if len(self.args) == 0 or self.args[0] == "all":
-            return {'artisan_list':Source.objects.all(),'services_list':services()}
+        if kwargs.has_key("types") != True or kwargs["types"] is "all":
+            artisans = Source.objects.all()
         else: 
-            keyword = 'services__'+slugify(self.args[0])
+            keyword = 'services__'+slugify(kwargs["types"])
             artisans = Source.objects.filter(**{keyword:True})
+
+        # Paginate the artisans
+        if self.request.GET.get('page'):
+            page = self.request.GET.get('page')
+        else:
+            page = 1
+        paginator = Paginator(artisans,PER_PAGE)
+        try:
+            artisans = paginator.page(page)
+        except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+             artisans = paginator.page(1)
+        except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+            artisans = paginator.page(paginator.num_pages)
+
+        if len(self.args) != 0:
             return {'artisan_list':artisans,'services_list':services(),'slug':slugify(self.args[0])}
+        else:
+            return {'artisan_list':artisans,'services_list':services()}
+

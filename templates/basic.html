@@ -1,8 +1,17 @@
 {% extends "master.html" %}
 {% block content %}
-{% if artisan_list %}
+{% if artisan_list.object_list %}
+  <ul class="pager">
+        {% if artisan_list.has_previous %}
+            <li><a href="?page={{ artisan_list.previous_page_number }}">&larr; Previous</a></li>
+        {% endif %}
+    <li class="active"><a href="#">{{ artisan_list.number }}</a></li>
+        {% if artisan_list.has_next %}
+            <li><a href="?page={{ artisan_list.next_page_number }}">Next &rarr;</a></li>
+        {% endif %}
+  </ul>
 <table class="table">
-{% for artisan in artisan_list %}
+{% for artisan in artisan_list.object_list %}
 <tr class="{% cycle 'row1' 'row2' %}">
 <td>
 	<h4>{{ artisan.name }}</h4>
@@ -24,6 +33,15 @@
 </tr>
 {% endfor %}
 </table>
+  <ul class="pager">
+        {% if artisan_list.has_previous %}
+            <li><a href="?page={{ artisan_list.previous_page_number }}">&larr; Previous</a></li>
+        {% endif %}
+    <li class="active"><a href="#">{{ artisan_list.number }}</a></li>
+        {% if artisan_list.has_next %}
+            <li><a href="?page={{ artisan_list.next_page_number }}">Next &rarr;</a></li>
+        {% endif %}
+  </ul>
 {% else %}
 <p>No artisans found.</p>
 {% endif %}
