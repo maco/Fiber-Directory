@@ -110,7 +110,7 @@ class FabricView(TemplateView):
 class BasicView(TemplateView):
     template_name = 'basic.html'
     def get_context_data(self, **kwargs):
-        if kwargs.has_key("types") != True or kwargs["types"] is "all":
+        if kwargs.has_key("types") != True or kwargs["types"] == "all":
             artisans = Source.objects.all()
         else: 
             keyword = 'services__'+slugify(kwargs["types"])
