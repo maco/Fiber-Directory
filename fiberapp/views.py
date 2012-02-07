@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from fiberapp.models import Source, Services, Farming, Garments
-from fiberapp.models import Sheep_Breeds, Alpaca_Breeds, Rabbit_Breeds, Goat_Breeds, Plants
+from fiberapp.models import Sheep_Breeds, Alpaca_Breeds, Rabbit_Breeds, Goat_Breeds
+from fiberapp.models import Dye_Plant_Breeds, Fiber_Plant_Breeds
 from django.views.generic.base import TemplateView
 from django.template.defaultfilters import slugify
 from django.template.defaultfilters import title
@@ -34,12 +35,21 @@ class FarmingView(TemplateView):
     def get_context_data(self, **kwargs):
         artisans = Source.objects.filter(services__farming__isnull=False)
         second_level=""
+        second_level_verbose=""
         third_level=""
         # make a filter list for sidebar
         sidebar = []
-        type_list = []
+        type_list = {}
         for field in Farming._meta.many_to_many:
-            type_list.append(field)
+            keyword = field.name
+            if Farming.objects.filter(**{keyword:True}):
+                print field.name+" full"
+                type_list[field] = "full"
+            else:
+                print field.name+" empty"
+                type_list[field] = "empty"
+
+
         if len(self.args) == 1:
             keyword = "services__farming__"+slugify(self.args[0])+"__isnull"
             artisans = Source.objects.filter(**{keyword:False})
@@ -52,14 +62,26 @@ class FarmingView(TemplateView):
 
         if len(self.args) > 0:
             second_level=slugify(self.args[0])
-            breed_list = []
+            breed_list = {}
+            # make a dictionary of breeds and whether they have data
             for breed in eval('%s_Breeds._meta.fields' % title(self.args[0])):
                 if not breed.name is 'id':
-                    breed_list.append(breed)
+                    keyword = breed.name
+                    if eval('%s_Breeds' % title(self.args[0])).objects.filter(**{keyword:True}):
+                        breed_list[breed] = "full"
+                    else:
+                        breed_list[breed] = "empty"
+                        
+
+            # Store verbose name for the category we're in
+            for cat in Farming._meta.many_to_many:
+                if cat.name == slugify(self.args[0]):
+                    print cat.verbose_name
+                    second_level_verbose = cat.verbose_name
             sidebar = [type_list, breed_list ]
         else:
             sidebar = type_list
-        return {'sidebar_list':sidebar,'services_list':services(),'artisan_list':artisans,'second_level':second_level,'third_level':third_level}
+        return {'sidebar_list':sidebar,'services_list':services(),'artisan_list':artisans,'second_level':second_level,'second_level_verbose':second_level_verbose,'third_level':third_level}
 
 class FabricView(TemplateView):
     template_name = 'fabric.html'

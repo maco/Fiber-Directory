@@ -59,13 +59,16 @@
     	</div>
       </div>
     </div>
-
+<header class="jumbotron subhead" id="overview">
+{% block header %}
+{% endblock header %}
   <div class="subnav">
 	  <ul class="nav nav-pills">    
 		  {% block breadcrumbs %}
 		  {% endblock breadcrumbs%}
 	  </ul>
   </div>
+</header>
 
 	<div class="container-fluid">
 	  <div class="row-fluid">
@@ -93,6 +96,7 @@
 			<li><a href="/contact">Contact</a></li>
 			<li><a href="/about">About Us</a></li>
 			<li><a href="https://github.com/maco/Fiber-Directory/">Get the Code</a></li>
+			<li><a href="http://glyphicons.com/">Icons by Glyphicons</a></li>
 		<ul>
       </footer>
     </div><!--/.fluid-container-->

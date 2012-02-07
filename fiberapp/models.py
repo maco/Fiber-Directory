@@ -4,43 +4,43 @@ import string
 
 # Create your models here.
 class Sheep_Breeds(models.Model):
-    merino = models.BooleanField(default=False)
-    cormo = models.BooleanField(default=False)
-    wensleydale = models.BooleanField(default=False)
-    corriedale = models.BooleanField(default=False)
-    leicester_longwool = models.BooleanField(default=False)
     bluefaced_leicester = models.BooleanField(default=False)
+    border_leicester = models.BooleanField(default=False)
+    california_red = models.BooleanField(default=False)
+    cheviot = models.BooleanField(default=False)
+    clun_forest = models.BooleanField(default=False)
+    columbia = models.BooleanField(default=False)
+    coopworth = models.BooleanField(default=False)
+    cormo = models.BooleanField(default=False)
+    corriedale = models.BooleanField(default=False)
+    cotswold = models.BooleanField(default=False)
     cvm = models.BooleanField("CVM",default=False)
+    dorset_down = models.BooleanField(default=False)
+    dorset_horn = models.BooleanField("dorset horn & poll dorset",default=False)
+    finnish_landrace = models.BooleanField(default=False)
+    icelandic = models.BooleanField(default=False)
+    jacob = models.BooleanField(default=False)
+    leicester_longwool = models.BooleanField(default=False)
+    lincoln = models.BooleanField(default=False)
+    merino = models.BooleanField(default=False)
+    montadale = models.BooleanField(default=False)
+    navajo_churro = models.BooleanField("navajo-churro",default=False)
+    oxford = models.BooleanField(default=False)
+    perendale = models.BooleanField(default=False)
     polwarth = models.BooleanField(default=False)
     rambouillet = models.BooleanField(default=False)
     romeldale = models.BooleanField(default=False)
-    targhee = models.BooleanField(default=False)
-    california_red = models.BooleanField(default=False)
-    columbia = models.BooleanField(default=False)
-    finnish_landrace = models.BooleanField(default=False)
-    montadale = models.BooleanField(default=False)
-    tunis = models.BooleanField(default=False)
-    cheviot = models.BooleanField(default=False)
-    clun_forest = models.BooleanField(default=False)
-    dorset_down = models.BooleanField(default=False)
-    dorset_horn = models.BooleanField("dorset horn or poll dorset",default=False)
-    oxford = models.BooleanField(default=False)
+    romney = models.BooleanField(default=False)
     ryeland = models.BooleanField(default=False)
+    scottish_blackface = models.BooleanField(default=False)
+    shetland = models.BooleanField(default=False)
     shropshire = models.BooleanField(default=False)
     southdown = models.BooleanField(default=False)
     suffolk = models.BooleanField(default=False)
-    border_leicester = models.BooleanField(default=False)
-    coopworth = models.BooleanField(default=False)
-    cotswold = models.BooleanField(default=False)
-    lincoln = models.BooleanField(default=False)
-    perendale = models.BooleanField(default=False)
-    romney = models.BooleanField(default=False)
+    targhee = models.BooleanField(default=False)
     teeswater = models.BooleanField(default=False)
-    icelandic = models.BooleanField(default=False)
-    jacob = models.BooleanField(default=False)
-    navajo_churro = models.BooleanField("navajo-churro",default=False)
-    scottish_blackface = models.BooleanField(default=False)
-    shetland = models.BooleanField(default=False)
+    tunis = models.BooleanField(default=False)
+    wensleydale = models.BooleanField(default=False)
     
 class Rabbit_Breeds(models.Model):
     french_angora = models.BooleanField(default=False)
@@ -52,16 +52,49 @@ class Alpaca_Breeds(models.Model):
     huayaca = models.BooleanField(default=False)
 
 class Goat_Breeds(models.Model):
-    kashmir = models.BooleanField("kashmir (cashmere)",default=False)
     angora = models.BooleanField("angora (mohair)",default=False)
+    kashmir = models.BooleanField("kashmir (cashmere)",default=False)
 
-class Plants(models.Model):
-    TYPE_CHOICES = (
-        (u'fiber',u'Fiber'),
-        (u'dye',u'Dye')
-    )
-    name = models.CharField(max_length=64,primary_key=True)
-    plant_type = models.CharField(max_length=20,choices=TYPE_CHOICES)
+class Dye_Plant_Breeds(models.Model):
+    agrimony = models.BooleanField(default=False)
+    alkanet = models.BooleanField(default=False)
+    bloodroot = models.BooleanField(default=False)
+    broom = models.BooleanField(default=False)
+    bronze_fennel = models.BooleanField(default=False)
+    blackeyed_susan = models.BooleanField(default=False)
+    coreopsis = models.BooleanField(default=False)
+    chamomile = models.BooleanField(default=False)
+    dahlia = models.BooleanField(default=False)
+    elecampane = models.BooleanField(default=False)
+    goldenrod = models.BooleanField(default=False)
+    heather = models.BooleanField(default=False)
+    hollyhock = models.BooleanField(default=False)
+    indigo = models.BooleanField(default=False)
+    ladys_bedstraw = models.BooleanField("lady's bedstraw",default=False)
+    ladys_mantle = models.BooleanField("lady's mantle",default=False)
+    madder = models.BooleanField(default=False)
+    marigold = models.BooleanField(default=False)
+    purple_perilla = models.BooleanField(default=False)
+    pot_marigold = models.BooleanField(default=False)
+    purple_basil = models.BooleanField(default=False)
+    rose_mallow = models.BooleanField(default=False)
+    russian_sage = models.BooleanField(default=False)
+    saffron = models.BooleanField(default=False)
+    scotch_broom = models.BooleanField(default=False)
+    sunflower = models.BooleanField(default=False)
+    tansy = models.BooleanField(default=False)
+    weld = models.BooleanField(default=False)
+    woad = models.BooleanField(default=False)
+    woodruff = models.BooleanField(default=False)
+    yarrow = models.BooleanField(default=False)
+    yellow_comos = models.BooleanField(default=False)
+    yellow_root = models.BooleanField(default=False)
+    zinnia = models.BooleanField(default=False)
+
+class Fiber_Plant_Breeds(models.Model):
+    cotton = models.BooleanField(default=False)
+    flax = models.BooleanField("flax (linen)",default=False)
+    
 
 class Garments(models.Model):
     hats = models.BooleanField(default=False)
@@ -73,7 +106,7 @@ class Garments(models.Model):
     skirts = models.BooleanField(default=False)
     trousers = models.BooleanField(default=False)
     dresses = models.BooleanField(default=False)
-    hands = models.BooleanField("mittens and gloves",default=False)
+    hands = models.BooleanField("mittens & gloves",default=False)
     def __unicode__(self):
         garments = []
         if self.hats == True:
@@ -104,7 +137,13 @@ class Farming(models.Model):
     rabbit = models.ManyToManyField(Rabbit_Breeds,blank=True)
     goat = models.ManyToManyField(Goat_Breeds,blank=True)
     alpaca  = models.ManyToManyField(Alpaca_Breeds,blank=True)
-    plant = models.ManyToManyField(Plants,blank=True,verbose_name="plants")
+    dye_plant = models.ManyToManyField(Dye_Plant_Breeds,blank=True,verbose_name="dye plants")
+    fiber_plant = models.ManyToManyField(Fiber_Plant_Breeds,blank=True,verbose_name="fiber plants")
+
+class Garment_Making(models.Model):
+    knitting = models.ManyToManyField(Garments,related_name="%(app_label)s_%(class)s_related_knitting",blank=True)
+    crochet = models.ManyToManyField(Garments,related_name="%(app_label)s_%(class)s_related_crochet",blank=True)
+    sewing = models.ManyToManyField(Garments,related_name="%(app_label)s_%(class)s_related_sewing",blank=True)
 
 class Services(models.Model):
     farming = models.ManyToManyField(Farming,blank=True,verbose_name="farming")
@@ -114,9 +153,7 @@ class Services(models.Model):
     handspinning = models.BooleanField(default=False)
     millspinning = models.BooleanField(default=False)
     weaving = models.BooleanField(default=False)
-    knitting = models.ManyToManyField(Garments,related_name="%(app_label)s_%(class)s_related_knitting",blank=True)
-    crochet = models.ManyToManyField(Garments,related_name="%(app_label)s_%(class)s_related_crochet",blank=True)
-    sewing = models.ManyToManyField(Garments,related_name="%(app_label)s_%(class)s_related_sewing",blank=True)
+    garment_making = models.ManyToManyField(Garment_Making,blank=True)
     dyeing = models.BooleanField(default=False)
     felting = models.BooleanField(default=False)
 
@@ -136,12 +173,8 @@ class Services(models.Model):
             services.append("millspinning")
         if self.weaving == True:
             services.append("weaving")
-        if self.knitting.count() > 0:
-            services.append("knitting")
-        if self.crochet.count() > 0:
-            services.append("crochet")
-        if self.sewing.count() > 0:
-            services.append("sewing")
+        if self.garment_making.count() > 0:
+            services.append("garment making")
         if self.dyeing == True:
             services.append("dyeing")
         if self.felting == True:

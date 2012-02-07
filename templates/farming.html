@@ -3,32 +3,48 @@
 {% if sidebar_list %}
 {% if second_level == "" %}
 	<li class="nav-header">Type:</li>
-	{% for category in sidebar_list %}
-			<li><a href="/service/farming/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
+	{% for category,emptiness in sidebar_list.items %}
+		<li><a 
+		{% if emptiness == "empty" %}
+			class = "empty"
+		{% endif %}
+		href="/service/farming/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
 	{% endfor %}
 {% else %}
 	{% for list in sidebar_list %}
 		{% if forloop.first %}
+			{# This is the type list #}
 			<li class="nav-header">Type:</li>
-			{% for category in list %}
+			{% for category, emptiness in list.items %}
 				{% if category.name == second_level %}
 					<li class="active"><a href="/service/farming/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
 				{% else %}
-					<li><a href="/service/farming/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
+				<li><a
+					{% if emptiness == "empty" %}
+						class="empty"
+					{% endif %}
+					href="/service/farming/{{ category.name }}">{{ category.verbose_name|title }}</a></li>
 				{% endif %}
 			{% endfor %}
 		{% else %}
+			{# This is the breed list #}
 			<li class="nav-header">Breed:</li>
-			{% for category in list %}
+			{% for category,emptiness in list.items %}
 				{% if category.verbose_name == third_level %}
 					<li class="active">
 				{% else %}
-				<li>{% endif %}<a href="/service/farming/{{ second_level }}/{{ category.name }}">
-					{% if category.name == "cvm" %}
-						{{ category.verbose_name }}
-					{% else %}
-						{{ category.verbose_name|title }}
-					{% endif %}
+				<li>
+				{% endif %} 
+				<a
+				{% if emptiness == "empty" %}
+					class="empty"
+				{% endif %}
+				href="/service/farming/{{ second_level }}/{{ category.name }}">
+				{% if category.name == "cvm" %}
+					{{ category.verbose_name }}
+				{% else %}
+					{{ category.verbose_name|title }}
+				{% endif %}
 					</a></li>
 			{% endfor %}
 		{% endif %}
@@ -58,12 +74,12 @@
   {% endif %} 
   {% if second_level != "" and third_level == "" %}
   <li class="active">
-    <a href="#">{{ second_level|title }}</a> <span class="divider">/</span>
+    <a href="#">{{ second_level_verbose|title }}</a> <span class="divider">/</span>
   </li>
   {% endif %}
   {% if second_level != "" and third_level != "" %}
   <li>
-    <a href="/service/farming/{{ second_level }}">{{ second_level|title }}</a> <span class="divider">/</span>
+    <a href="/service/farming/{{ second_level }}">{{ second_level_verbose|title }}</a> <span class="divider">/</span>
   </li>
   <li class="active">
 	{% if third_level == "CVM" %}
@@ -87,3 +103,4 @@
 				<p>No services known.</p>
 			{% endfor %}
 {% endblock topnav %}
+

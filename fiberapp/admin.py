@@ -2,8 +2,10 @@ from fiberapp.models import Sheep_Breeds
 from fiberapp.models import Rabbit_Breeds
 from fiberapp.models import Alpaca_Breeds
 from fiberapp.models import Goat_Breeds
-from fiberapp.models import Plants
+from fiberapp.models import Dye_Plant_Breeds
+from fiberapp.models import Fiber_Plant_Breeds
 from fiberapp.models import Garments
+from fiberapp.models import Garment_Making
 from fiberapp.models import Services
 from fiberapp.models import Source
 from fiberapp.models import Farming
@@ -60,8 +62,10 @@ admin.site.register(Sheep_Breeds,Sheep_Breeds_Admin)
 admin.site.register(Rabbit_Breeds)
 admin.site.register(Alpaca_Breeds)
 admin.site.register(Goat_Breeds)
-admin.site.register(Plants)
+admin.site.register(Dye_Plant_Breeds)
+admin.site.register(Fiber_Plant_Breeds)
 admin.site.register(Garments)
+admin.site.register(Garment_Making)
 admin.site.register(Services)
 admin.site.register(Source)
 admin.site.register(Farming)
