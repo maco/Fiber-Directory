@@ -43,13 +43,13 @@ class Sheep_Breeds(models.Model):
     wensleydale = models.BooleanField(default=False)
     
 class Rabbit_Breeds(models.Model):
+    english_angora = models.BooleanField(default=False)
     french_angora = models.BooleanField(default=False)
     german_angora = models.BooleanField(default=False)
-    english_angora = models.BooleanField(default=False)
 
 class Alpaca_Breeds(models.Model):
+    huacaya = models.BooleanField(default=False)
     suri = models.BooleanField(default=False)
-    huayaca = models.BooleanField(default=False)
 
 class Goat_Breeds(models.Model):
     angora = models.BooleanField("angora (mohair)",default=False)
@@ -133,10 +133,10 @@ class Garments(models.Model):
         return mystr
 
 class Farming(models.Model):
-    sheep = models.ManyToManyField(Sheep_Breeds,blank=True)
-    rabbit = models.ManyToManyField(Rabbit_Breeds,blank=True)
-    goat = models.ManyToManyField(Goat_Breeds,blank=True)
     alpaca  = models.ManyToManyField(Alpaca_Breeds,blank=True)
+    goat = models.ManyToManyField(Goat_Breeds,blank=True)
+    rabbit = models.ManyToManyField(Rabbit_Breeds,blank=True)
+    sheep = models.ManyToManyField(Sheep_Breeds,blank=True)
     dye_plant = models.ManyToManyField(Dye_Plant_Breeds,blank=True,verbose_name="dye plants")
     fiber_plant = models.ManyToManyField(Fiber_Plant_Breeds,blank=True,verbose_name="fiber plants")
 
