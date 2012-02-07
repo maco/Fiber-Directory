@@ -43,10 +43,8 @@ class FarmingView(TemplateView):
         for field in Farming._meta.many_to_many:
             keyword = field.name
             if Farming.objects.filter(**{keyword:True}):
-                print field.name+" full"
                 type_list[field] = "full"
             else:
-                print field.name+" empty"
                 type_list[field] = "empty"
 
 
@@ -76,7 +74,6 @@ class FarmingView(TemplateView):
             # Store verbose name for the category we're in
             for cat in Farming._meta.many_to_many:
                 if cat.name == slugify(self.args[0]):
-                    print cat.verbose_name
                     second_level_verbose = cat.verbose_name
             sidebar = [type_list, breed_list ]
         else:
