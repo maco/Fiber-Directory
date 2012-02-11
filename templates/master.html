@@ -83,10 +83,8 @@
 		  </div><!--/.well -->
 		</div><!--/span-->
 		<div class="span9">
-		  <div class="hero-unit">
-			{% block content %}
-			{% endblock content%}
-   		  </div>
+		  {% block content %}
+		  {% endblock content%}
 		</div> <!--/span-->
 	    </div><!--/row-->
       <hr>
@@ -106,6 +104,15 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		!function ($) {
+			$(function(){
+				$('.carousel').carousel();
+			})
+
+		}(window.jQuery)
+	</script>
+
 
   </body>
 </html>
