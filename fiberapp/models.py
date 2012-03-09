@@ -189,7 +189,8 @@ class Source(models.Model):
         (u'DE',u'Delaware'),
         (u'MD',u'Maryland'),
         (u'PA',u'Pennsylvania'),
-        (u'VA',u'Virginia')
+        (u'VA',u'Virginia'),
+        (u'WV',u'West Virginia')
     )
     name = models.CharField(max_length=100,primary_key=True,unique=True)
     contact_name = models.CharField(max_length=100,blank=True)
