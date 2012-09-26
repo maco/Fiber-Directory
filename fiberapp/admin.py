@@ -58,6 +58,10 @@ class Sheep_Breeds_Admin(admin.ModelAdmin):
             'shetland']})
     ]
 
+class Source_Admin(admin.ModelAdmin):
+    list_display = ('name','contact_name')
+    search_files = ['name','contact_name']
+
 admin.site.register(Sheep_Breeds,Sheep_Breeds_Admin)
 admin.site.register(Rabbit_Breeds)
 admin.site.register(Alpaca_Breeds)
@@ -67,5 +71,5 @@ admin.site.register(Fiber_Plant_Breeds)
 admin.site.register(Garments)
 admin.site.register(Garment_Making)
 admin.site.register(Services)
-admin.site.register(Source)
+admin.site.register(Sourcei, Source_Admin)
 admin.site.register(Farming)
